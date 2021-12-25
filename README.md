@@ -20,9 +20,10 @@ Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIV
 
 Any Contribution is wellcome.
 
-WORKING:
+-WORKING:
 Basic buy and Sells
-TO DO:
+
+-TO DO:
 
 1. Filter for misfire 
 2. Enable more order types
