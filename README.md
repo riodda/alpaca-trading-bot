@@ -5,8 +5,7 @@ This Bot will lissen for a webhook from Trading View on port 80 and execute the 
 edit config.py with api keys and path, ip address in line 121 of bot.py
 
 
-    `flaskServer.run(host='127.0.0.1',port=80, debug=True)
-`
+    `flaskServer.run(host='127.0.0.1',port=80, debug=True)`
 
 Bot accepts orders only in json format
 
