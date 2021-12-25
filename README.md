@@ -2,15 +2,29 @@
 Simple Python Alpaca Trading Bot, DON'T USE FOR LIVE TRADING
 
 This Bot will lissen for a webhook from Trading View on port 80 and execute the trade received by webhook.
-Example Payload (json format)
+Bot accepts orders only in json format
+Example of base order payload
 
 { 
+"Time":"{{time}}",
 "symbol": "{{ticker}}", 
 "qty": "1", 
 "usd_order": "false", 
 "action": "buy", 
 "type": "market",
 "time_in_force": "gtc" 
+}
+
+Example of fractional order payload (must be time in force = day).
+
+{ 
+"Time":"{{time}}",
+"symbol": "{{ticker}}", 
+"qty": "50", 
+"usd_order": "true", 
+"action": "buy", 
+"type": "market",
+"time_in_force": "day" 
 }
 
 qty is base if usd_order set to false, usd is usd_order set to true.
