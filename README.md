@@ -16,7 +16,14 @@ Example Payload
 
 Currently supports fractional orders or base orders (if a symbo il not fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
 
-Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADIN.
+Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADING.
+to start the bot is suggested to use screen
+start at boot on crontab with:
+
+@reboot /usr/bin/screen -S alpaca_bot -d -m   /usr/bin/python3 -u /foder_of_bot/bot.py
+
+If you have other flask instances is likely to not work.
+
 
 Any Contribution is wellcome.
 
