@@ -1,8 +1,8 @@
 # alpaca-trading-bot
 Simple Python Alpaca Trading Bot, DON'T USE FOR LIVE TRADING
 
-This Bot will lissen for a webhook from Trading View on port 80 and executed the trade received by the webhook.
-Example Payload
+This Bot will lissen for a webhook from Trading View on port 80 and execute the trade received by webhook.
+Example Payload (json format)
 
 { 
 "symbol": "{{ticker}}", 
@@ -13,16 +13,19 @@ Example Payload
 "time_in_force": "gtc" 
 }
 
+qty is base if usd_order set to false, usd is usd_order set to true.
 
-Currently supports fractional orders or base orders (if a symbo il not fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
+Currently supports fractional orders or base orders (if a symbol isnot fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
 
 Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADING.
-to start the bot is suggested to use screen
+
+To start the bot is suggested to use screen
+
 start at boot on crontab with:
 
 @reboot /usr/bin/screen -S alpaca_bot -d -m   /usr/bin/python3 -u /foder_of_bot/bot.py
 
-If you have other flask instances is likely to not work.
+If you have other flask instances is likely not to work.
 
 
 Any Contribution is wellcome.
@@ -34,7 +37,11 @@ Any Contribution is wellcome.
 -TO DO:
 
 
-2. Enable more order types
-3. Check and track positions 
-4. Improve logging
-5. Add don't sell at loss
+1. Enable more order types
+2. Check and track positions 
+3. Improve logging
+4. Add don't sell at loss (to prevent unwanted sells).
+5. Some security/token/password on webhook
+6. Formal check of payload
+7. Check of symbol existence/treadability
+8. Support for pre and after hour markets (can't be tested on paper)
