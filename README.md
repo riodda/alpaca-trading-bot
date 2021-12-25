@@ -2,7 +2,9 @@
 Simple Python Alpaca Trading Bot, **DON'T USE FOR LIVE TRADING**
 
 This Bot will lissen for a webhook from Trading View on port 80 and execute the trade received by webhook.
+
 Bot accepts orders only in json format
+
 Example of base order payload
 
 `{ 
@@ -27,6 +29,7 @@ Example of fractional order payload (must be time in force = day).
 "time_in_force": "day" 
 }
 `
+
 qty is base if usd_order set to false, usd is usd_order set to true.
 
 Currently supports fractional orders or base orders (if a symbol isnot fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
