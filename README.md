@@ -21,7 +21,7 @@ Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIV
 Any Contribution is wellcome.
 
 -WORKING:
-Basic buy and Sells
+1. Basic buy and Sells
 
 -TO DO:
 
