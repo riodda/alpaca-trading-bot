@@ -5,6 +5,8 @@ import json
 from flask import Flask, request, abort
 import functions as rff
 import math
+import os
+from config import *
 
 
 def webhookParse(webhook_data):
@@ -22,8 +24,38 @@ def root():
 def webhookListen():
     if request.method == 'POST':
         data = request.get_data(as_text=True)
-        json_data  = json.loads(data)
-        rff.writelog("SYSTEM,Payload Received,"+data.strip("\n"))
+        #try to decode as json
+        try:
+            json_data  = json.loads(data)
+            rff.writelog("SYSTEM,Payload Received,"+data.strip("\n")) 
+
+        except:
+            rff.writelog("SYSTEM,ERROR,Malformed or invalid json payload")
+            abort(400, description="Malformed or invalid json payload")
+
+        #save load and compare with last json message
+        filename = 'payload_'+str(json_data['symbol'])+'.json'
+
+        if os.path.isfile(payload_dir+filename):
+            #old symbo, load json and compare with previous payload
+            f = open(payload_dir+filename)
+            old_message = json.load(f)
+            
+            if (old_message == json_data):
+                rff.writelog("SYSTEM,ERROR,Duplicated payload,"+data.strip("\n"))
+                abort(400, description="Duplicated payload")
+            else:
+                #different json payload replace file
+                os.remove(payload_dir+filename)
+                with open(payload_dir+filename, 'w') as f:
+                    json.dump(json_data,f)
+
+        else:
+            #new symbol, save first message
+            with open(payload_dir+filename, 'w') as f:
+                    json.dump(json_data,f)
+
+
         #retrive asset details
         asset = rff.alpaca_get_asset(json_data['symbol'])
         last_price = rff.alpaca_get_last_price(json_data['symbol'])
@@ -33,14 +65,17 @@ def webhookListen():
              if (rff.alpaca_check_market_open() == True):
                  if (json_data['usd_order'] == "false"):                                                         
                     order = rff.alpaca_submit_market_buy_order(json_data['symbol'],json_data['qty'],'gtc')
+                    print(order)
                     rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+json_data['qty']+","+str(last_price)+","+str(order.id))                  
                  if ((json_data['usd_order'] == "true") and (asset.fractionable)):                    
                     #rff.alpaca_submit_market_buy_order(json_data['symbol'],json_data['qty'],'gtc')
                     order = rff.alpaca_submit_market_notional_buy_order(json_data['symbol'],json_data['qty'],'day')
+                    print(order)
                     rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
                  if ((json_data['usd_order'] == "true") and not(asset.fractionable)):                    
                     buy_amount = math.ceil((float(json_data['qty'])/last_price))
                     order = rff.alpaca_submit_market_buy_order(json_data['symbol'],buy_amount,'gtc')
+                    print(order)
                     rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
                     #calculate asset amount to buy and truncate to integer.
              if (rff.alpaca_check_market_open() == False):
@@ -55,6 +90,7 @@ def webhookListen():
              
              if ((rff.alpaca_check_market_open() == True) and (not(position == False))):
                  order = rff.alpaca_submit_sell_order(json_data['symbol'],json_data['qty'],'gtc')
+                 print(order)
                  rff.writelog("TRADING,"+"SELL,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
                  
              if (rff.alpaca_check_market_open() == False):
@@ -66,11 +102,12 @@ def webhookListen():
              position = rff.alpaca_get_position(json_data['symbol']) 
              if ((rff.alpaca_check_market_open() == True) and (not(position == False))):
                  order = rff.alpaca_close_position(json_data['symbol'])
+                 print(order)
                  rff.writelog("TRADING,CLOSE,"+str(json_data['symbol'])+","+str(position.qty)+","+str(last_price)+","+str(order.id)+","+str(position.unrealized_pl))
                  
              if (rff.alpaca_check_market_open() == False):
                  rff.writelog("TRADING,ERROR,Market Closed,"+str(json_data['symbol']))
-        print(order)
+        
         return '', 200
     else:
         print("Some kind of error has happen")
