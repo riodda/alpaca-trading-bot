@@ -1,11 +1,11 @@
 # alpaca-trading-bot
-Simple Python Alpaca Trading Bot, DON'T USE FOR LIVE TRADING
+Simple Python Alpaca Trading Bot, **DON'T USE FOR LIVE TRADING**
 
 This Bot will lissen for a webhook from Trading View on port 80 and execute the trade received by webhook.
 Bot accepts orders only in json format
 Example of base order payload
 
-{ 
+`{ 
 "Time":"{{time}}",
 "symbol": "{{ticker}}", 
 "qty": "1", 
@@ -13,11 +13,11 @@ Example of base order payload
 "action": "buy", 
 "type": "market",
 "time_in_force": "gtc" 
-}
+}`
 
 Example of fractional order payload (must be time in force = day).
 
-{ 
+`{ 
 "Time":"{{time}}",
 "symbol": "{{ticker}}", 
 "qty": "50", 
@@ -26,7 +26,7 @@ Example of fractional order payload (must be time in force = day).
 "type": "market",
 "time_in_force": "day" 
 }
-
+`
 qty is base if usd_order set to false, usd is usd_order set to true.
 
 Currently supports fractional orders or base orders (if a symbol isnot fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
@@ -37,19 +37,19 @@ To start the bot is suggested to use screen
 
 start at boot on crontab with:
 
-@reboot /usr/bin/screen -S alpaca_bot -d -m   /usr/bin/python3 -u /foder_of_bot/bot.py
+`@reboot /usr/bin/screen -S alpaca_bot -d -m   /usr/bin/python3 -u /foder_of_bot/bot.py`
 
 If you have other flask instances is likely not to work.
 
 
 Any Contribution is wellcome.
 
--WORKING:
+**-KIND OF WORKING:**
+
 1. Basic buy and Sells
 2. Filter for misfire, basic check of received paylod if is equal to stored one is considered a misfire, be sure to add to the payload something that guarantee that is a geniuine strategy generated signal (trade counter for example). Still no guarnatee about the coeherence between trading view strategy and alerts generated.
 
--TO DO:
-
+**-TO DO:**
 
 1. Enable more order types
 2. Check and track positions 
