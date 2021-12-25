@@ -29,10 +29,11 @@ Any Contribution is wellcome.
 
 -WORKING:
 1. Basic buy and Sells
+2. Filter for misfire, basic check of received paylod if is equal to stored one is considered a misfire, be sure to add to the payload something that guarantee that is a geniuine strategy generated signal (trade counter for example). Still no guarnatee about the coeherence between trading view strategy and alerts generated.
 
 -TO DO:
 
-1. Filter for misfire 
+
 2. Enable more order types
 3. Check and track positions 
 4. Improve logging
