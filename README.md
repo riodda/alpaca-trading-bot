@@ -66,4 +66,4 @@ Any Contribution is wellcome.
 6. Formal check of payload
 7. Check of symbol existence/treadability
 8. Support for pre and after hour markets (can't be tested on paper)
-9. Add ip address in config file
+
