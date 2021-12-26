@@ -118,5 +118,5 @@ def webhookListen():
     
 if __name__ == '__main__':
     rff.writelog("SYSTEM,Bot Started")
-    flaskServer.run(host='127.0.0.1',port=80, debug=True)
+    flaskServer.run(host=str(ip_address),port=webhook_port, debug=True)
     
