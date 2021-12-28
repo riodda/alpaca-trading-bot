@@ -1,4 +1,4 @@
-# alpaca-trading-bot
+# WATB Webhook Alpaca Trading Bot
 Simple Python Alpaca Trading Bot, **DON'T USE FOR LIVE TRADING**
 
 This Bot will lissen for a webhook from Trading View on given port and execute the trade received by webhook.
