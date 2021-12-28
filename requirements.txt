@@ -1,0 +1,6 @@
+alpaca_trade_api==0.51.0
+Flask==1.1.2
+Flask_APScheduler==1.12.3
+numpy==1.19.4
+pandas==1.2.0
+requests==2.26.0
