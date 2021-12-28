@@ -1,11 +1,22 @@
 # alpaca-trading-bot
 Simple Python Alpaca Trading Bot, **DON'T USE FOR LIVE TRADING**
 
-This Bot will lissen for a webhook from Trading View on port 80 and execute the trade received by webhook.
-edit config.py with api keys and path, ip address in line 121 of bot.py
+This Bot will lissen for a webhook from Trading View on given port and execute the trade received by webhook.
+edit config.py with api keys and path, ip address port log and payload folders
 
+`key = "MYKEY"`
 
-    `flaskServer.run(host='127.0.0.1',port=80, debug=True)`
+`secretKey = "MYSECRET"`
+
+`api_url = "https://paper-api.alpaca.markets"`
+
+`log_dir = "Z:\Trading\Alpaca TV Bot"`
+
+`payload_dir = "Z:\Trading\Alpaca TV Bot"`
+
+`ip_address = "127.0.0.1"`
+
+`webhook_port = 80`
 
 Bot accepts orders only in json format
 
@@ -64,6 +75,5 @@ Any Contribution is wellcome.
 4. Add don't sell at loss (to prevent unwanted sells).
 5. Some security/token/password on webhook
 6. Formal check of payload
-7. Check of symbol existence/treadability
-8. Support for pre and after hour markets (can't be tested on paper)
+7. Support for pre and after hour markets (can't be tested on paper)
 
