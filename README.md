@@ -45,9 +45,9 @@ Example of fractional order payload (must be time in force = day).
 }
 `
 
-qty is base if usd_order set to false, usd is usd_order set to true.
+if `"usd_order"` set to `"false"` `"qty"` is base (contracts), usd if `"usd_order"` set to `"true`".
 
-Currently supports fractional orders or base orders (if a symbol isnot fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
+Currently supports fractional orders or integer contract orders (if a symbol is not fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
 
 Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADING.
 
