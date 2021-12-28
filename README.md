@@ -1,8 +1,9 @@
-# alpaca-trading-bot
+# WATB Webhook Alpaca Trading Bot
 Simple Python Alpaca Trading Bot, **DON'T USE FOR LIVE TRADING**
 
-This Bot will lissen for a webhook from Trading View on given port and execute the trade received by webhook.
-edit config.py with api keys and path, ip address port log and payload folders
+This Bot will lissen for a webhook from Trading View or other platforms on given port and execute the trade received by webhook.
+
+Edit config.py with api keys, ip address, port, log and payload folders.
 
 `key = "MYKEY"`
 
@@ -45,9 +46,13 @@ Example of fractional order payload (must be time in force = day).
 }
 `
 
-qty is base if usd_order set to false, usd is usd_order set to true.
+if `"usd_order"` set to `"false"` `"qty"` is base (contracts), usd if `"usd_order"` set to `"true`".
 
-Currently supports fractional orders or base orders (if a symbol isnot fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
+Currently supports fractional orders or integer contract orders (if a symbol is not fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
+
+Mandatory json fields: 
+
+`"symbol","qty","usd_order","action","type","time_in_force"`
 
 Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADING.
 
@@ -76,4 +81,8 @@ Any Contribution is wellcome.
 5. Some security/token/password on webhook
 6. Formal check of payload
 7. Support for pre and after hour markets (can't be tested on paper)
+8. Check Daytrade Status
+9. Check Buying Power for short trades
+10. Check all json fields are present
+11. Limit Orders
 
