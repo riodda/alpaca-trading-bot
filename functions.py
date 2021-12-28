@@ -106,3 +106,14 @@ def alpaca_trailing_buy_order(_symbol,_qty,_trailing_pct):
 def alpaca_get_asset(_symbol):
     _asset = api.get_asset(_symbol)
     return _asset
+    
+    
+def alpaca_get_all_symbols():
+    try:
+        _active_assets = api.list_assets(status='active')
+        _symbols = []
+        for _asset in _active_assets:
+            _symbols.append(_asset.symbol)
+        return _symbols
+    except:
+        return False
