@@ -1,4 +1,15 @@
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
+'''
+WATB !!!!
+Webhook Alpaca Trading Bot by Dario Armellin riodda@gmail.com
+(C) 2021
+
+Base trading bot, intially based on the idea from East Village Trading Robot
+https://github.com/wallacewd/Alpaca-TradingView-Trading-Bot-for-AWS.git
+Evolved on his own
+Don't use for live trading
+NOT A FINANCIAL ADVICE
+'''
 import ast
 import requests
 import json
@@ -9,7 +20,8 @@ import math
 import os
 from config import *
 
-#all_symbols = []
+WATB_VERSION = '0.1-b.1'
+__version__ = WATB_VERSION
 
 def webhookParse(webhook_data):
     
@@ -72,9 +84,10 @@ def webhookListen():
 
         #retrive asset details
         asset = rff.alpaca_get_asset(json_data['symbol'])
-        if (asset == False):
-            rff.writelog("TRADING,ERROR, Unrecognized Symbol,"+data.strip("\n"))
-            abort(400, description="Invalid Symbol") 
+        #redundant code, check is already done with symbo list
+        #if (asset == False):
+        #    rff.writelog("TRADING,ERROR, Unrecognized Symbol,"+data.strip("\n"))
+        #    abort(400, description="Invalid Symbol") 
 
         last_price = rff.alpaca_get_last_price(json_data['symbol'])
         #Check if market is open
@@ -83,23 +96,41 @@ def webhookListen():
             abort(400, description="Market Closed")
         
         if json_data['action'] == "buy":
+            #retrive account and buying power
+            max_buy_amount = rff.alpaca_get_buying_power()   
+            rff.writelog("TRADING,Current Buying power "+str(max_buy_amount))
+            
             #Buy Routine check for usd or base order and asset fractionability   
             if (json_data['usd_order'] == "false"):                                                         
-                order = rff.alpaca_submit_market_buy_order(json_data['symbol'],json_data['qty'],'gtc')
-                print(order)
-                rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+json_data['qty']+","+str(last_price)+","+str(order.id)) 
-            #asset  fractionable calculate asset amount to buy.            
-            if ((json_data['usd_order'] == "true") and (asset.fractionable)):                    
-                order = rff.alpaca_submit_market_notional_buy_order(json_data['symbol'],json_data['qty'],'day')
-                print(order)
-                rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
+                if (float(json_data['qty'])*last_price) < max_buy_amount:
+                    order = rff.alpaca_submit_market_buy_order(json_data['symbol'],json_data['qty'],'gtc')
+                    print(order)
+                    rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+json_data['qty']+","+str(last_price)+","+str(order.id)) 
+                else:
+                    rff.writelog("TRADING,ERROR,Insufficent Buying power:"+str(max_buy_amount)+" needed:"+str(float(json_data['qty'])*last_price)) 
+                    abort(400, description="Insufficent Buying power")
+                    
+            #asset  fractionable calculate asset amount to buy
+            
+            if ((json_data['usd_order'] == "true") and (asset.fractionable)):
+                if  (float(json_data['qty']) < max_buy_amount):
+                    order = rff.alpaca_submit_market_notional_buy_order(json_data['symbol'],json_data['qty'],'day')
+                    print(order)
+                    rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
+                else:
+                    rff.writelog("TRADING,ERROR,Insufficent Buying power:"+str(max_buy_amount)+" needed:"+str(float(json_data['qty'])))
+                    abort(400, description="Insufficent Buying power")
+                    
             #asset not fractionable calculate asset amount to buy and round up to integer.
             if ((json_data['usd_order'] == "true") and not(asset.fractionable)):                    
                 buy_amount = math.ceil((float(json_data['qty'])/last_price))
-                order = rff.alpaca_submit_market_buy_order(json_data['symbol'],buy_amount,'gtc')
-                print(order)
-                rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
-                
+                if (buy_amount*last_price < max_buy_amount):
+                    order = rff.alpaca_submit_market_buy_order(json_data['symbol'],buy_amount,'gtc')
+                    print(order)
+                    rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
+                else:
+                    rff.writelog("TRADING,ERROR,Insufficent Buying power:"+str(max_buy_amount)+" needed:"+str(buy_amount*last_price))
+                    abort(400, description="Insufficent Buying power")
                  
                     
         if (json_data['action'] == "sell") and (int(json_data['qty']) > 0): 
@@ -135,9 +166,25 @@ def webhookListen():
         abort(400)
 
 #Start Bot
-    
+
+slpash = """
+Starting
+
+ █     █░ ▄▄▄     ▄▄▄█████▓ ▄▄▄▄   
+▓█░ █ ░█░▒████▄   ▓  ██▒ ▓▒▓█████▄ 
+▒█░ █ ░█ ▒██  ▀█▄ ▒ ▓██░ ▒░▒██▒ ▄██
+░█░ █ ░█ ░██▄▄▄▄██░ ▓██▓ ░ ▒██░█▀  
+░░██▒██▓  ▓█   ▓██▒ ▒██▒ ░ ░▓█  ▀█▓
+░ ▓░▒ ▒   ▒▒   ▓▒█░ ▒ ░░   ░▒▓███▀▒
+  ▒ ░ ░    ▒   ▒▒ ░   ░    ▒░▒   ░ 
+  ░   ░    ░   ▒    ░       ░    ░ 
+    ░          ░  ░         ░      
+                                 ░ 
+Webhook Alpaca Trading Bot Version:"""+WATB_VERSION
+
 if __name__ == '__main__':
-    rff.writelog("SYSTEM,Bot Started")
+    print(slpash)
+    rff.writelog("SYSTEM,WATB Bot Started version "+WATB_VERSION)
     all_symbols = rff.alpaca_get_all_symbols()
     rff.writelog("SYSTEM,Updating Symbol List")
     scheduler.add_job(id = 'Update Symbols', func=update_symbol_list, trigger="interval", minutes=120)

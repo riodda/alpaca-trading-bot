@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
 
 import numpy as np
 import pandas as pd
@@ -13,9 +13,9 @@ LogDirectory = log_dir
 api = tradeapi.REST(key, secretKey, base_url=api_url, api_version='v2') # or use ENV Vars shown below
 
 def writelog(msg):
-    time=(datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
+    time=(datetime.now().strftime('%Y-%m-%d,%H:%M:%S.%f'))
 
-    s=f'{time} {msg}\n'
+    s=f'{time},{msg}\n'
 
     fh=open(LogDirectory+'/alpaca_bot.log','a')
     fh.write(s)
@@ -85,6 +85,16 @@ def alpaca_close_position(_symbol):
 def alpaca_get_last_price(_symbol):
     _last_trade = api.get_last_quote(symbol=_symbol)
     _last_price = (float(_last_trade.askprice)+float(_last_trade.bidprice))/2
+    return _last_price
+
+def alpaca_get_bid_price(_symbol):
+    _last_trade = api.get_last_quote(symbol=_symbol)
+    _last_price = (float(_last_trade.bidprice))/2
+    return _last_price
+
+def alpaca_get_last_ask_price(_symbol):
+    _last_trade = api.get_last_quote(symbol=_symbol)
+    _last_price = (float(_last_trade.askprice))
     return _last_price
 
 def alpaca_submit_buy_order(_symbol,_qty):
