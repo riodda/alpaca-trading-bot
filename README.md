@@ -2,7 +2,8 @@
 Simple Python Alpaca Trading Bot, **DON'T USE FOR LIVE TRADING**
 
 This Bot will lissen for a webhook from Trading View or other platforms on given port and execute the trade received by webhook.
-edit config.py with api keys and path, ip address port log and payload folders
+
+Edit config.py with api keys, ip address, port, log and payload folders.
 
 `key = "MYKEY"`
 
