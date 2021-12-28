@@ -50,6 +50,10 @@ if `"usd_order"` set to `"false"` `"qty"` is base (contracts), usd if `"usd_orde
 
 Currently supports fractional orders or integer contract orders (if a symbol is not fractionable but usd_order is set as true will calculate the psize accoding to the qty received and will round up the amount.
 
+Mandatory json fields: 
+
+`"symbol","qty","usd_order","action","buy","type","time_in_force"`
+
 Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADING.
 
 To start the bot is suggested to use screen
@@ -79,4 +83,5 @@ Any Contribution is wellcome.
 7. Support for pre and after hour markets (can't be tested on paper)
 8. Check Daytrade Status
 9. Check Buying Power for short trades
+10. Check all json fields are present
 
