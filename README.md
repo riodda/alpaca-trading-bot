@@ -52,7 +52,7 @@ Currently supports fractional orders or integer contract orders (if a symbol is 
 
 Mandatory json fields: 
 
-`"symbol","qty","usd_order","action","buy","type","time_in_force"`
+`"symbol","qty","usd_order","action","type","time_in_force"`
 
 Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADING.
 
@@ -84,4 +84,5 @@ Any Contribution is wellcome.
 8. Check Daytrade Status
 9. Check Buying Power for short trades
 10. Check all json fields are present
+11. Limit Orders
 
