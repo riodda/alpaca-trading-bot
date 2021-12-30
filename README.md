@@ -80,8 +80,9 @@ Any Contribution is wellcome.
 4. Some security/token/password on webhook
 5. Formal check of payload
 6. Support for pre and after hour markets (can't be tested on paper)
-7. Check Daytrade Status
+7. Check Daytrade Status and set alarm
 8. Check Buying Power for short trades
 9. Check all json fields are present
 10. Limit Orders
+11. Log to Discord/Telegram
 
