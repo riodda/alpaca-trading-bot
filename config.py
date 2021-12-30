@@ -11,4 +11,5 @@ payload_dir = "C:\#temp"
 ip_address = "127.0.0.1"
 day_trade = False
 webhook_port = 80
+min_pct_for_sell = 0
 
