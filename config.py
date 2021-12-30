@@ -2,13 +2,20 @@
 
 # Enter your alpaca api key and secret key below!
 
-key = "PK1E77UBOPKOC1IEV6S9"
-secretKey = "Gjw91aERKWM3ah4vLE19Qo3hOA6Ayt4AponURu0f"
+key = "MYKEY"
+secretKey = "MYSECRET"
 #change for live trading
 api_url = "https://paper-api.alpaca.markets"
-log_dir = "C:\#temp"
-payload_dir = "C:\#temp"
+#change for desired log and payload folders
+log_dir = "/var/log/"
+payload_dir = "/root/"
+#public ip address of for fask server
 ip_address = "127.0.0.1"
-day_trade = False
 webhook_port = 80
+#Enable daytrade
+day_trade = False
+min_pct_for_sell = 0
+#delete this keys if dont whant log forwarded to telegram
+telegram_bot_token = 'telegram_token'
+telegram_bot_chatID = 'telegram_chat_id'
 

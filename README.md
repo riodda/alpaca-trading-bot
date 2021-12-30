@@ -77,12 +77,12 @@ Any Contribution is wellcome.
 1. Enable more order types
 2. Check and track positions 
 3. Improve logging
-4. Add don't sell at loss (to prevent unwanted sells).
-5. Some security/token/password on webhook
-6. Formal check of payload
-7. Support for pre and after hour markets (can't be tested on paper)
-8. Check Daytrade Status
-9. Check Buying Power for short trades
-10. Check all json fields are present
-11. Limit Orders
+4. Some security/token/password on webhook
+5. Formal check of payload
+6. Support for pre and after hour markets (can't be tested on paper)
+7. Check Daytrade Status and set alarm
+8. Check Buying Power for short trades
+9. Check all json fields are present
+10. Limit Orders
+11. Log to Discord/Telegram
 
