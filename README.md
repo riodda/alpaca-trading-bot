@@ -84,5 +84,5 @@ Any Contribution is wellcome.
 8. Check Buying Power for short trades
 9. Check all json fields are present
 10. Limit Orders
-11. Log to Discord/Telegram
+11. Control trough to Discord/Telegram
 
