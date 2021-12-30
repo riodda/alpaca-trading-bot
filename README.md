@@ -94,4 +94,5 @@ Any Contribution is wellcome.
 9. Check all json fields are present
 10. Limit Orders
 11. Control trough to Discord/Telegram
+12. Base pinescript strategy to test bot
 
