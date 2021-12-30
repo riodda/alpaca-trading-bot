@@ -151,7 +151,7 @@ def webhookListen():
             #close code, check if market open then retrive postions find position for symbol check qty then close sell position
             #Retrive Position
             position = rff.alpaca_get_position(json_data['symbol']) 
-            if ((rff.alpaca_check_market_open() == True) and (not(position == False))):
+            if ((rff.alpaca_check_market_open() == True) and (not(position == False)) and (float(unrealized_plpc.unrealized_plpc) > min_pct_for_sell)):
                 order = rff.alpaca_close_position(json_data['symbol'])
                 print(order)
                 rff.writelog("TRADING,CLOSE,"+str(json_data['symbol'])+","+str(position.qty)+","+str(last_price)+","+str(order.id)+","+str(position.unrealized_pl))
