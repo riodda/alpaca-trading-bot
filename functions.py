@@ -7,6 +7,7 @@ from config import *
 from datetime import datetime
 import time
 import os
+import requests
 
 LogDirectory = log_dir
 
@@ -14,12 +15,12 @@ api = tradeapi.REST(key, secretKey, base_url=api_url, api_version='v2') # or use
 
 def writelog(msg):
     time=(datetime.now().strftime('%Y-%m-%d,%H:%M:%S.%f'))
-
     s=f'{time},{msg}\n'
-
     fh=open(LogDirectory+'/alpaca_bot.log','a')
     fh.write(s)
     fh.close()
+    telegram_bot_sendtext(s)
+
     
 def alpaca_get_15Min_bars(_symbol,_number):
     _df=pd.DataFrame()
@@ -37,6 +38,14 @@ def alpaca_get_15Min_bars(_symbol,_number):
             _temp = api.get_barset(_symbol, '15Min', limit=1000, start=None, end=None, after=None, until=_df.first_valid_index().isoformat()).df
             _df= pd.concat([_temp,_df,])
     return _df
+
+def telegram_bot_sendtext(_bot_message):
+    if ('telegram_bot_token' in globals()) and ('telegram_bot_chatID' in globals()):
+        send_text = 'https://api.telegram.org/bot' + telegram_bot_token + '/sendMessage?chat_id=' + telegram_bot_chatID + '&parse_mode=Markdown&text=' + _bot_message
+        response = requests.get(send_text)
+        return response.json()
+    else:
+        return False
 
 def alpaca_get_buying_power():
     account = api.get_account()
