@@ -20,7 +20,7 @@ import math
 import os
 from config import *
 
-WATB_VERSION = '0.1-b.1'
+WATB_VERSION = '0.1-b.2'
 __version__ = WATB_VERSION
 
 def webhookParse(webhook_data):
