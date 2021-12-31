@@ -3,7 +3,7 @@ Simple Python Alpaca Trading Bot, **DON'T USE FOR LIVE TRADING**
 
 This Bot will lissen for a webhook from Trading View or other platforms on given port and execute the trade received by webhook.
 
-Edit config.py with api keys, ip address, port, log and payload folders.
+Edit config.py with api keys, ip address, port, log and payload folders, ip addres and port, daytrade flag minimum pct for sell and (optional telegram credentials).
 
 `key = "MYKEY"`
 
@@ -18,6 +18,15 @@ Edit config.py with api keys, ip address, port, log and payload folders.
 `ip_address = "127.0.0.1"`
 
 `webhook_port = 80`
+
+`day_trade = False`
+
+`min_pct_for_sell = 0`
+
+`telegram_bot_token = 'telegram_token'`
+
+`telegram_bot_chatID = 'telegram_chat_id'`
+
 
 Bot accepts orders only in json format
 
@@ -84,5 +93,6 @@ Any Contribution is wellcome.
 8. Check Buying Power for short trades
 9. Check all json fields are present
 10. Limit Orders
-11. Log to Discord/Telegram
+11. Control trough to Discord/Telegram
+12. Base pinescript strategy to test bot
 
