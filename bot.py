@@ -96,9 +96,16 @@ def webhookListen():
             abort(400, description="Market Closed")
         
         if json_data['action'] == "buy":
-            #retrive account and buying power
-            max_buy_amount = rff.alpaca_get_buying_power()   
+            #retrive account buying power and daytrade count
+            
+            account = rff.alpaca_get_account()
+            max_buy_amount = float(account.buying_power)
+            daytrade_count = int(account.daytrade_count)
+                
             rff.writelog("TRADING,Current Buying power "+str(max_buy_amount))
+            rff.writelog("TRADING,Current daytrade count "+str(daytrade_count))
+            #Create a Special Alert for DAYTRADE count >= 4            
+            
             
             #Buy Routine check for usd or base order and asset fractionability   
             if (json_data['usd_order'] == "false"):                                                         
