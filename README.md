@@ -46,6 +46,7 @@ Bot accepts orders only in json format
 Example of base order payload
 
 `{ 
+"token" : "my-token",
 "Time":"{{time}}",
 "symbol": "{{ticker}}", 
 "qty": "1", 
@@ -58,6 +59,7 @@ Example of base order payload
 Example of fractional order payload (must be time in force = day).
 
 `{ 
+"token" : "my-token",
 "Time":"{{time}}",
 "symbol": "{{ticker}}", 
 "qty": "50", 
