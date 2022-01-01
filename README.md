@@ -19,7 +19,7 @@ Edit config.py with api keys, ip address, port, log and payload folders, ip addr
 
 `webhook_port = 80`
 
-Replace my-token with a random generated token
+Replace my-token with a random generated token (with linux you can generate a random token with `tr -dc A-Za-z0-9 </dev/urandom | head -c 13 ; echo ''`)
 
 `webhook_token = "my-token"`
 
