@@ -37,7 +37,8 @@ Replace my-uuid with machine uuid (with linux you can generate a rando uuid wiht
 
 On console the bot will output the webhook address
 
-![image](https://user-images.githubusercontent.com/13453063/147855005-fdddab1a-cd0e-4fcc-bb97-a631367772c3.png)
+![image](https://user-images.githubusercontent.com/13453063/147855033-8e0914f6-9530-485a-b388-45efcdd58c08.png)
+
 
 
 Bot accepts orders only in json format
