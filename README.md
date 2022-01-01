@@ -18,6 +18,10 @@ Edit config.py with api keys, ip address, port, log and payload folders, ip addr
 `ip_address = "127.0.0.1"`
 
 `webhook_port = 80`
+Replace my-token with a random generated token
+`webhook_token = "my-token"`
+Replace my-uuid with machine uuid (with linux you can generate a rando uuid wiht uuidgen)
+`webhook_uuid = "my-uuid"`
 
 `day_trade = False`
 
