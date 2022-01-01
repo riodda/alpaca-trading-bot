@@ -35,6 +35,10 @@ Replace my-uuid with machine uuid (with linux you can generate a rando uuid wiht
 
 `telegram_bot_chatID = 'telegram_chat_id'`
 
+On console the bot will output the webhook address
+
+![image](https://user-images.githubusercontent.com/13453063/147855005-fdddab1a-cd0e-4fcc-bb97-a631367772c3.png)
+
 
 Bot accepts orders only in json format
 
