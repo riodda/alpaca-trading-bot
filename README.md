@@ -101,14 +101,13 @@ Any Contribution is wellcome.
 1. Enable more order types
 2. Check and track positions 
 3. Improve logging
-4. Some security/token/password on webhook
-5. Formal check of payload
-6. Support for pre and after hour markets (can't be tested on paper)
-7. Check Daytrade Status and set alarm
-8. Check Buying Power for short trades
-9. Check all json fields are present
-10. Limit Orders
-11. Control trough to Discord/Telegram
-12. Base pinescript strategy to test bot
-13. Add strategy Name in Payload with ACTIVE/NON ACTIVE flag for forward testing
+4. Formal check of payload
+5. Support for pre and after hour markets (can't be tested on paper)
+6. Check Daytrade Status and set alarm
+7. Check Buying Power for short trades
+8. Check all json fields are present
+9. Limit Orders
+10. Control trough to Discord/Telegram
+11. Base pinescript strategy to test bot
+12. Add strategy Name in Payload with ACTIVE/NON ACTIVE flag for forward testing
 
