@@ -1,3 +1,16 @@
+```
+█     █░ ▄▄▄     ▄▄▄█████▓ ▄▄▄▄   
+▓█░ █ ░█░▒████▄   ▓  ██▒ ▓▒▓█████▄ 
+▒█░ █ ░█ ▒██  ▀█▄ ▒ ▓██░ ▒░▒██▒ ▄██
+░█░ █ ░█ ░██▄▄▄▄██░ ▓██▓ ░ ▒██░█▀  
+░░██▒██▓  ▓█   ▓██▒ ▒██▒ ░ ░▓█  ▀█▓
+░ ▓░▒ ▒   ▒▒   ▓▒█░ ▒ ░░   ░▒▓███▀▒
+  ▒ ░ ░    ▒   ▒▒ ░   ░    ▒░▒   ░ 
+  ░   ░    ░   ▒    ░       ░    ░ 
+    ░          ░  ░         ░      
+                                 ░
+```
+
 # WATB Webhook Alpaca Trading Bot
 Simple Python Alpaca Trading Bot, **DON'T USE FOR LIVE TRADING**
 
@@ -45,7 +58,8 @@ Bot accepts orders only in json format
 
 Example of base order payload
 
-`{ 
+```
+{ 
 "token" : "my-token",
 "Time":"{{time}}",
 "symbol": "{{ticker}}", 
@@ -54,11 +68,13 @@ Example of base order payload
 "action": "buy", 
 "type": "market",
 "time_in_force": "gtc" 
-}`
+}
+```
 
 Example of fractional order payload (must be time in force = day).
 
-`{ 
+```
+{ 
 "token" : "my-token",
 "Time":"{{time}}",
 "symbol": "{{ticker}}", 
@@ -68,7 +84,7 @@ Example of fractional order payload (must be time in force = day).
 "type": "market",
 "time_in_force": "day" 
 }
-`
+```
 
 if `"usd_order"` set to `"false"` `"qty"` is base (contracts), usd if `"usd_order"` set to `"true`".
 
@@ -76,7 +92,7 @@ Currently supports fractional orders or integer contract orders (if a symbol is 
 
 Mandatory json fields: 
 
-`"symbol","qty","usd_order","action","type","time_in_force"`
+`"token","symbol","qty","usd_order","action","type","time_in_force"`
 
 Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADING.
 
