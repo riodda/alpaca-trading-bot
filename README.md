@@ -124,6 +124,6 @@ Any Contribution is wellcome.
 8. Check all json fields are present
 9. Limit Orders
 10. Control trough to Discord/Telegram
-11. Base pinescript strategy to test bot
+11. Base pinescript strategy to test bot (meanwhile you can subscribe to Jackrabbit/TV https://www.patreon.com/posts/32778737)
 12. Add strategy Name in Payload with ACTIVE/NON ACTIVE flag for forward testing
 
