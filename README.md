@@ -36,7 +36,7 @@ Replace my-token with a random generated token (with linux you can generate a ra
 
 `webhook_token = "my-token"`
 
-Replace my-uuid with machine uuid (with linux you can generate a rando uuid wiht `uuidgen`)
+Replace my-uuid with machine uuid (with linux you can generate a random uuid wiht `uuidgen`)
 
 `webhook_uuid = "my-uuid"`
 
