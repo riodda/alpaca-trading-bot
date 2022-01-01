@@ -12,6 +12,8 @@ payload_dir = "/root/"
 #public ip address of for fask server
 ip_address = "127.0.0.1"
 webhook_port = 80
+webhook_token = "my-token"
+webhook_uuid = "my-uiid" 
 #Enable daytrade
 day_trade = False
 min_pct_for_sell = 0

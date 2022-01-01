@@ -95,4 +95,5 @@ Any Contribution is wellcome.
 10. Limit Orders
 11. Control trough to Discord/Telegram
 12. Base pinescript strategy to test bot
+13. Add strategy Name in Payload with ACTIVE/NON ACTIVE flag for forward testing
 
