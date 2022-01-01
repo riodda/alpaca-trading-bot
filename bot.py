@@ -41,7 +41,8 @@ def update_symbol_list():
 def root():
     return 'online'
 
-@flaskServer.route('/webhook', methods=['POST'])
+base_url = '/'+webhook_uuid
+@flaskServer.route(base_url, methods=['POST'])
 def webhookListen():
     if request.method == 'POST':
         data = request.get_data(as_text=True)
@@ -49,10 +50,18 @@ def webhookListen():
         try:
             json_data  = json.loads(data)
             rff.writelog("SYSTEM,Payload Received,"+data.strip("\n")) 
-
+                    #check if payload has right token
+            if (json_data['token'] == webhook_token):
+                rff.writelog("SYSTEM,Correct Token")
+            else:
+                rff.writelog("SYSTEM,ERROR,Incorrect Token")
+            
         except:
             rff.writelog("SYSTEM,ERROR,Malformed or invalid json payload")
             abort(400, description="Malformed or invalid json payload")
+        
+        #check al fields are correct and present symbol side qty type time in force usdorder
+        
         
         #check if symbol is valid
         if not(json_data['symbol'] in all_symbols):
@@ -158,7 +167,7 @@ def webhookListen():
             #close code, check if market open then retrive postions find position for symbol check qty then close sell position
             #Retrive Position
             position = rff.alpaca_get_position(json_data['symbol']) 
-            if ((rff.alpaca_check_market_open() == True) and (not(position == False)) and (float(unrealized_plpc.unrealized_plpc) > min_pct_for_sell)):
+            if ((rff.alpaca_check_market_open() == True) and (not(position == False)) and (float(position.unrealized_plpc) > min_pct_for_sell)):
                 order = rff.alpaca_close_position(json_data['symbol'])
                 print(order)
                 rff.writelog("TRADING,CLOSE,"+str(json_data['symbol'])+","+str(position.qty)+","+str(last_price)+","+str(order.id)+","+str(position.unrealized_pl))
@@ -188,15 +197,18 @@ Starting
     ░          ░  ░         ░      
                                  ░ 
 Webhook Alpaca Trading Bot Version:"""+WATB_VERSION
+url = "Webhook url: http://"+ip_address+':'+str(webhook_port)+base_url
 
 if __name__ == '__main__':
     print(slpash)
+    print(url)
     rff.writelog("SYSTEM,WATB Bot Started version "+WATB_VERSION)
     all_symbols = rff.alpaca_get_all_symbols()
     rff.writelog("SYSTEM,Updating Symbol List")
     scheduler.add_job(id = 'Update Symbols', func=update_symbol_list, trigger="interval", minutes=120)
     scheduler.start()
     flaskServer.run(host=str(ip_address),port=webhook_port, debug=True)
+   
     
 
    
