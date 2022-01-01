@@ -54,7 +54,7 @@ On console the bot will output the webhook address
 
 
 
-Bot accepts orders only in json format
+Bot accepts orders only in json format, formal check of json formatting is done as first upon receiving of the payload, you can check you payload trough any online tool (such as https://jsonlint.com/ or https://jsonformatter.curiousconcept.com/)
 
 Example of base order payload
 
