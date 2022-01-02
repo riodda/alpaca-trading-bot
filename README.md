@@ -133,4 +133,5 @@ Any Contribution is wellcome.
 11. Base pinescript strategy to test bot (meanwhile you can subscribe to Jackrabbit/TV https://www.patreon.com/posts/32778737)
 12. Add strategy Name in Payload with ACTIVE/NON ACTIVE flag for forward testing
 13. Add shorting, add reduce only in sell to avoid shorting
+14. Integration with a trding log
 
