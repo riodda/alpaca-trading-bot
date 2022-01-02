@@ -98,7 +98,7 @@ Currently `"action": "buy"`, with `"qty"`>0 will open a long position, a further
 
 If `"action": "sell"` with `"qty":` >0 in case of a long position the position size will be reduced by the amount of qty, if the long position is smaller than qty bot will create a short position by the difference.
 
-If `"action": "sell"` `with "qty":` >0 and no long position present nothing will happen.
+If `"action": "sell"` `with "qty":` >0 and no long position present nothing will happen, bot will not open a short position.
 
 Due to the wellknown Tradingview misfire problem on alerts DO NOT USE IT FOR LIVE TRADING.
 
@@ -133,5 +133,5 @@ Any Contribution is wellcome.
 11. Base pinescript strategy to test bot (meanwhile you can subscribe to Jackrabbit/TV https://www.patreon.com/posts/32778737)
 12. Add strategy Name in Payload with ACTIVE/NON ACTIVE flag for forward testing
 13. Add shorting, add reduce only in sell to avoid shorting
-14. Integration with a trding log
+14. Integration with a trading log
 
