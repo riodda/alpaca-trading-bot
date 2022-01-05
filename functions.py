@@ -75,15 +75,15 @@ def alpaca_check_market_open():
 def alpaca_get_positions():       
     return api.list_positions()
 
-def alpaca_submit_market_buy_order(_symbol,_qty,_time_in_force):    
-    _order = api.submit_order(symbol=_symbol,qty=_qty,side='buy',type='market',time_in_force=_time_in_force)
+def alpaca_submit_market_buy_order(_symbol,_qty,_time_in_force,_client_order_id='WATB'):    
+    _order = api.submit_order(symbol=_symbol,qty=_qty,side='buy',type='market',time_in_force=_time_in_force,client_order_id=_client_order_id)
     return _order
 
-def alpaca_submit_market_notional_buy_order(_symbol,_qty,_time_in_force):    
+def alpaca_submit_market_notional_buy_order(_symbol,_qty,_time_in_force,_client_order_id='WATB'):      
     _order = api.submit_order(symbol=_symbol,notional=_qty,side='buy',type='market',time_in_force=_time_in_force)
     return _order
 
-def alpaca_submit_limit_buy_order(_symbol,_qty,_limit_price,_time_in_force):    
+def alpaca_submit_limit_buy_order(_symbol,_qty,_limit_price,_time_in_force,_client_order_id='WATB'):     
     _order = api.submit_order(symbol=_symbol,qty=_qty,side='buy',type='limit',limit_price=_limit_price,time_in_force=_time_in_force)
     return _order
     

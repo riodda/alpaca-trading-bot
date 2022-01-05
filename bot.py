@@ -20,7 +20,7 @@ import math
 import os
 from config import *
 
-WATB_VERSION = '0.1-b.2'
+WATB_VERSION = '0.1-b.3'
 __version__ = WATB_VERSION
 
 def webhookParse(webhook_data):
@@ -119,7 +119,10 @@ def webhookListen():
             #Buy Routine check for usd or base order and asset fractionability   
             if (json_data['usd_order'] == "false"):                                                         
                 if (float(json_data['qty'])*last_price) < max_buy_amount:
-                    order = rff.alpaca_submit_market_buy_order(json_data['symbol'],json_data['qty'],'gtc')
+                    if 'strategy' in json_data:
+                        order = rff.alpaca_submit_market_buy_order(json_data['symbol'],json_data['qty'],'gtc',json_data['strategy'])
+                    else:
+                        order = rff.alpaca_submit_market_buy_order(json_data['symbol'],json_data['qty'],'gtc')
                     print(order)
                     rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+json_data['qty']+","+str(last_price)+","+str(order.id)) 
                 else:
@@ -130,7 +133,10 @@ def webhookListen():
             
             if ((json_data['usd_order'] == "true") and (asset.fractionable)):
                 if  (float(json_data['qty']) < max_buy_amount):
-                    order = rff.alpaca_submit_market_notional_buy_order(json_data['symbol'],json_data['qty'],'day')
+                    if 'strategy' in json_data:
+                        order = rff.alpaca_submit_market_notional_buy_order(json_data['symbol'],json_data['qty'],'day',json_data['strategy'])
+                    else:
+                        order = rff.alpaca_submit_market_notional_buy_order(json_data['symbol'],json_data['qty'],'day')
                     print(order)
                     rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
                 else:
@@ -141,7 +147,10 @@ def webhookListen():
             if ((json_data['usd_order'] == "true") and not(asset.fractionable)):                    
                 buy_amount = math.ceil((float(json_data['qty'])/last_price))
                 if (buy_amount*last_price < max_buy_amount):
-                    order = rff.alpaca_submit_market_buy_order(json_data['symbol'],buy_amount,'gtc')
+                    if 'strategy' in json_data:
+                        order = rff.alpaca_submit_market_buy_order(json_data['symbol'],buy_amount,'gtc',json_data['strategy'])
+                    else:
+                        order = rff.alpaca_submit_market_buy_order(json_data['symbol'],buy_amount,'gtc')
                     print(order)
                     rff.writelog("TRADING,"+"BUY,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
                 else:
@@ -158,7 +167,10 @@ def webhookListen():
                 rff.writelog("TRADING,ERROR,"+str(json_data['symbol'])+",Missing Position")
              
             if not(position == False):
-                order = rff.alpaca_submit_sell_order(json_data['symbol'],json_data['qty'],'gtc')
+                if 'strategy' in json_data:
+                    order = rff.alpaca_submit_sell_order(json_data['symbol'],json_data['qty'],'gtc',json_data['strategy'])
+                else:
+                    order = rff.alpaca_submit_sell_order(json_data['symbol'],json_data['qty'],'gtc')
                 print(order)
                 rff.writelog("TRADING,"+"SELL,"+str(json_data['symbol'])+","+str(json_data['qty'])+","+str(last_price)+","+str(order.id))
                  
