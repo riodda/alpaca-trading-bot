@@ -4,8 +4,8 @@
 import uuid 
 #uuidOne = uuid.uuid1()
 
-key = "PK1E77UBOPKOC1IEV6S9"
-secretKey = "Gjw91aERKWM3ah4vLE19Qo3hOA6Ayt4AponURu0f"
+key = "KEY"
+secretKey = "SECRET"
 #change for live trading
 api_url = "https://paper-api.alpaca.markets"
 #change for desired log and payload folders
@@ -14,14 +14,14 @@ payload_dir = "C:/#temp/"
 #public ip address of for fask server
 ip_address = "127.0.0.1"
 webhook_port = 80
-webhook_token = "K3TY7umOIY4dM6xAWkFL"
-webhook_uuid = "0d704304-6b1d-11ec-89c8-d0c0bf8d8e20" 
+webhook_token = "TOKEN"
+webhook_uuid = "UID" 
 #Enable daytrade
 day_trade = False
 min_pct_for_sell = 0
 #delete this keys if dont whant log forwarded to telegram
-telegram_bot_token = '5085151169:AAHjtHQd8WTEWmc9ifNjZrMFB8oKXg-dTRw'
-telegram_bot_chatID = '1837798250'
+telegram_bot_token = 'TOKEN'
+telegram_bot_chatID = 'ID'
 
 # -*- coding: utf-8 -*-
 
