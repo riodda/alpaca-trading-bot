@@ -2,8 +2,6 @@
 
 # Enter your alpaca api key and secret key below!
 import uuid 
-#uuidOne = uuid.uuid1()
-
 key = "KEY"
 secretKey = "SECRET"
 #change for live trading
