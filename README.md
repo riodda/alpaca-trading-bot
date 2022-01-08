@@ -94,6 +94,8 @@ Mandatory json fields:
 
 `"token","symbol","qty","usd_order","action","type","time_in_force"`
 
+Optional field `"strategy","strategy_name"` will feed alpaca's client order id field.
+
 Currently `"action": "buy"`, with `"qty"`>0 will open a long position, a further buy order will increas the position, `"action": "sell"` with `"qty": "0"` will close a long position, if no position is present nothing will happen, same as `"action": "close"`.
 
 If `"action": "sell"` with `"qty":` >0 in case of a long position the position size will be reduced by the amount of qty, if the long position is smaller than qty bot will create a short position by the difference.
