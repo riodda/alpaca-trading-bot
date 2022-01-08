@@ -23,7 +23,3 @@ min_pct_for_sell = 0
 telegram_bot_token = 'TOKEN'
 telegram_bot_chatID = 'ID'
 
-# -*- coding: utf-8 -*-
-
-# Enter your alpaca api key and secret key below!
-
